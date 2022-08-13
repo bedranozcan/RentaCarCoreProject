@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RentaCar.Core.Dtos
 {
-    public class CategoriesDto
+    public class CategoryDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RentaCar.Core.Dtos
 {
-    public class CarsDto
+    public class CarDto
     {
         public int Id { get; set; }
         public string PlakaNumber { get; set; }
@@ -19,11 +19,6 @@ namespace RentaCar.Core.Dtos
         public string FuelType { get; set; }
         public string LicanceClass { get; set; }
         public int CategoriesId { get; set; }
-        public int StatusId { get; set; }
-        public ICollection<Hire> Hires { get; set; }
-        public  Category Categories { get; set; } = null!;
-        public  Status Status { get; set; } = null!;
-
-       
+        public int StatusId { get; set; }     
     }
 }

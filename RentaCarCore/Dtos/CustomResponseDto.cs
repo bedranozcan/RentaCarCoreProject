@@ -13,6 +13,8 @@ namespace RentaCar.Core.Dtos
 
         [JsonIgnore]
         public int StatusCode { get; set; }
+
+
         public List<string> Errors { get; set; }
 
 

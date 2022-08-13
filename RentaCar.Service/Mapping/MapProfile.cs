@@ -13,13 +13,13 @@ namespace RentaCar.Service.Mapping
     {
         public MapProfile()
         {
-            CreateMap<Customer, CustomersDto>().ReverseMap();
-            CreateMap<Hire, HiresDto>().ReverseMap();
+            CreateMap<Customer, CustomerDto>().ReverseMap();
+            CreateMap<Hire, HireDto>().ReverseMap();
             CreateMap<Status, StatusDto>().ReverseMap();
-            CreateMap<Car, CarsDto>().ReverseMap();
-            CreateMap<Payment, PaymentsDto>().ReverseMap();
+            CreateMap<Car, CarDto>().ReverseMap();
+            CreateMap<Payment, PaymentDto>().ReverseMap();
             CreateMap<PaymentType, PaymentTypeDto>().ReverseMap();
-            CreateMap<Category, CategoriesDto>().ReverseMap();
+            CreateMap<Category,CategoryDto>().ReverseMap();
         }
     }
 }
