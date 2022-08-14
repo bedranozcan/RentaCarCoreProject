@@ -8,12 +8,12 @@ using RentaCar.Core.Services;
 namespace RentaCar.API.Controllers
 {
 
-    public class CarsController : CustomBaseController
+    public class CarController : CustomBaseController
     {
         private readonly IMapper _mapper;
         private readonly IService<Car> _service;
 
-        public CarsController(IService<Car> service, IMapper mapper)
+        public CarController(IService<Car> service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
