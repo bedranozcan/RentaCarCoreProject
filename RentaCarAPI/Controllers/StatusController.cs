@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using RentaCar.Core.Dtos;
 using RentaCar.Core.Model;
 using RentaCar.Core.Services;
@@ -18,6 +18,7 @@ namespace RentaCar.API.Controllers
         {
             _service = service;
             _mapper = mapper;
+
         }
 
         [HttpGet]
@@ -63,5 +64,10 @@ namespace RentaCar.API.Controllers
 
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
+
+       
+
+
+
     }
 }

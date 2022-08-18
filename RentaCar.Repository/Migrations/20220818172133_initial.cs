@@ -125,6 +125,28 @@ namespace RentaCar.Repository.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "CarImages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ImagePath = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CarId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarImages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CarImages_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Hires",
                 columns: table => new
                 {
@@ -190,6 +212,11 @@ namespace RentaCar.Repository.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CarImages_CarId",
+                table: "CarImages",
+                column: "CarId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Cars_CategoriesId",
                 table: "Cars",
                 column: "CategoriesId");
@@ -227,6 +254,9 @@ namespace RentaCar.Repository.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CarImages");
+
             migrationBuilder.DropTable(
                 name: "Payments");
 

@@ -11,7 +11,7 @@ using RentaCar.Repository;
 namespace RentaCar.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220812181817_initial")]
+    [Migration("20220818172133_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,6 +70,26 @@ namespace RentaCar.Repository.Migrations
                     b.HasIndex("StatusId");
 
                     b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("RentaCar.Core.Model.CarImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("CarImages");
                 });
 
             modelBuilder.Entity("RentaCar.Core.Model.Category", b =>
@@ -228,6 +248,17 @@ namespace RentaCar.Repository.Migrations
                     b.Navigation("Categories");
 
                     b.Navigation("Status");
+                });
+
+            modelBuilder.Entity("RentaCar.Core.Model.CarImage", b =>
+                {
+                    b.HasOne("RentaCar.Core.Model.Car", "Cars")
+                        .WithMany()
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("RentaCar.Core.Model.Hire", b =>

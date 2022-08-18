@@ -22,7 +22,7 @@ namespace RentaCar.Repository
         DbSet<Hire> Hires { get; set; }
         DbSet<Payment> Payments { get; set; }
         DbSet<PaymentType> PaymentTypes { get; set; }
-
+        DbSet<CarImage> CarImages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

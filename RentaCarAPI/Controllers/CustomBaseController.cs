@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using RentaCar.Core.Dtos;
 
 namespace RentaCar.API.Controllers
@@ -8,6 +9,7 @@ namespace RentaCar.API.Controllers
     [ApiController]
     public class CustomBaseController : ControllerBase
     {
+     
         [NonAction]
         public IActionResult CreateActionResult<T>(CustomResponseDto<T> response)
         {
@@ -22,5 +24,6 @@ namespace RentaCar.API.Controllers
             };
             
         }
+        
     }
 }
