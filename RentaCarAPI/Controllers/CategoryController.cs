@@ -7,8 +7,7 @@ using RentaCar.Core.Services;
 
 namespace RentaCar.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+
     public class CategoryController : CustomBaseController
     {
         private readonly IMapper _mapper;
