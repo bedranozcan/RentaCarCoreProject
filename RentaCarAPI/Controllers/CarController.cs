@@ -11,19 +11,17 @@ namespace RentaCar.API.Controllers
     public class CarController : CustomBaseController
     {
         private readonly IMapper _mapper;
-        private readonly IService<Car> _service;
-        private readonly ICarService _carService;
+        private readonly ICarService _service;
         public CarController(IService<Car> service, IMapper mapper, ICarService carService)
         {
-            _service = service;
             _mapper = mapper;
-            _carService = carService;
+            _service = carService;
         }
 
         [HttpGet("GetCarsWithCategory")]
         public async Task<IActionResult> GetCarsWithCategory()
         {
-            return CreateActionResult(await _carService.GetCarsWithCategory());
+            return CreateActionResult(await _service.GetCarsWithCategory());
         }
 
         [HttpGet]

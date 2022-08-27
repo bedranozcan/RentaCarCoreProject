@@ -12,11 +12,18 @@ namespace RentaCar.API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IService<Category> _service;
-
-        public CategoryController(IService<Category> service, IMapper mapper)
+        private readonly ICategoryService _categoryService;
+        public CategoryController(IService<Category> service, IMapper mapper, ICategoryService categoryService)
         {
             _service = service;
             _mapper = mapper;
+            _categoryService = categoryService;
+        }
+
+        [HttpGet("[action]/{categoryId}")]
+        public async Task<IActionResult> GetSingleCategoryByIdWithCars(int categoryId)
+        {
+            return CreateActionResult(await _categoryService.GetSingleCategoryByIdWithCarsAsync(categoryId));
         }
 
         [HttpGet]
@@ -28,17 +35,17 @@ namespace RentaCar.API.Controllers
         }
 
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var categories = await _service.GetByIdAsync(id);
-            var categoryDtos = _mapper.Map<CategoryDto>(categories);
-            return CreateActionResult(CustomResponseDto<CategoryDto>.Success(200, categoryDtos));
-        }
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetById(int id)
+        //{
+        //    var categories = await _service.GetByIdAsync(id);
+        //    var categoryDtos = _mapper.Map<CategoryDto>(categories);
+        //    return CreateActionResult(CustomResponseDto<CategoryDto>.Success(200, categoryDtos));
+        //}
 
 
         [HttpPost()]
-        public async Task<IActionResult> Save(CategoryDto  categoryDto)
+        public async Task<IActionResult> Save(CategoryDto categoryDto)
         {
             var categories = await _service.AddAsync(_mapper.Map<Category>(categoryDto));
             var categoryDtos = _mapper.Map<CategoryDto>(categories);

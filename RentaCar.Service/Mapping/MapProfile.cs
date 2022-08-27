@@ -21,7 +21,8 @@ namespace RentaCar.Service.Mapping
             CreateMap<PaymentType, PaymentTypeDto>().ReverseMap();
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<CarImage, CarImageDto>().ReverseMap();
-            CreateMap<Car, CarsWithCategoryDto>().ReverseMap();
+            CreateMap<Car, CarsWithCategoryDto>();
+            CreateMap<Category, CategoryWithCarsDto>();
         }
     }
 }

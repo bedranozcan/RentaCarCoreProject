@@ -17,7 +17,7 @@ namespace RentaCar.Core.Model
         public int DoorNumber { get; set; }
         public string FuelType { get; set; }
         public string LicanceClass { get; set; }
-        public int CategoriesId { get; set; }
+        public int CategoryId { get; set; }
         public int StatusId { get; set; }
         public ICollection<Hire> Hires { get; set; }
         public  Category Category { get; set; } = null!;

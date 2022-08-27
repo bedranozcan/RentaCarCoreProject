@@ -31,7 +31,7 @@ namespace RentaCar.Repository
             modelBuilder.Entity<Car>()
             .HasOne(b => b.Category)
             .WithOne(i => i.Car)
-            .HasForeignKey<Car>(b => b.CategoriesId);
+            .HasForeignKey<Car>(b => b.CategoryId);
         }
     }
     

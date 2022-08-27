@@ -29,7 +29,7 @@ namespace RentaCar.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("CategoriesId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Color")
@@ -63,7 +63,7 @@ namespace RentaCar.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoriesId")
+                    b.HasIndex("CategoryId")
                         .IsUnique();
 
                     b.HasIndex("StatusId")
@@ -237,7 +237,7 @@ namespace RentaCar.Repository.Migrations
                 {
                     b.HasOne("RentaCar.Core.Model.Category", "Category")
                         .WithOne("Car")
-                        .HasForeignKey("RentaCar.Core.Model.Car", "CategoriesId")
+                        .HasForeignKey("RentaCar.Core.Model.Car", "CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

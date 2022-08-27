@@ -1,0 +1,33 @@
+﻿using AutoMapper;
+using RentaCar.Core.Dtos;
+using RentaCar.Core.Model;
+using RentaCar.Core.Repositories;
+using RentaCar.Core.Services;
+using RentaCar.Core.UnitOfWorks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace RentaCar.Service.Services
+{
+    public class CategoryService :Service<Category>, ICategoryService
+    {
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IMapper _mapper;
+        public CategoryService(IGenericRepository<Category> repository, IUnitOfWork unitOfWork, IMapper mapper, ICategoryRepository categoryRepository) : base(repository, unitOfWork)
+        {
+            _mapper = mapper;
+            _categoryRepository = categoryRepository;
+        }
+
+        public async Task<CustomResponseDto<CategoryWithCarsDto>> GetSingleCategoryByIdWithCarsAsync(int categoryId)
+        {
+            var category = await _categoryRepository.GetSingleCategoryByIdWithCarsAsync(categoryId);
+            var categoriesDto = _mapper.Map<CategoryWithCarsDto>(category);
+            return CustomResponseDto<CategoryWithCarsDto>.Success(200, categoriesDto);
+        }
+    }
+}

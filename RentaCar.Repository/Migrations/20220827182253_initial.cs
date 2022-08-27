@@ -103,15 +103,15 @@ namespace RentaCar.Repository.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     LicanceClass = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CategoriesId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cars", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cars_Categories_CategoriesId",
-                        column: x => x.CategoriesId,
+                        name: "FK_Cars_Categories_CategoryId",
+                        column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -217,9 +217,9 @@ namespace RentaCar.Repository.Migrations
                 column: "CarId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cars_CategoriesId",
+                name: "IX_Cars_CategoryId",
                 table: "Cars",
-                column: "CategoriesId",
+                column: "CategoryId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
