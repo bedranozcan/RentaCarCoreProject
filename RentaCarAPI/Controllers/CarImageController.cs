@@ -7,6 +7,8 @@ using RentaCar.Core.Services;
 
 namespace RentaCar.API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class CarImageController : CustomBaseController
     {
         private readonly IMapper _mapper;
@@ -22,10 +24,9 @@ namespace RentaCar.API.Controllers
         public async Task<IActionResult> All()
         {
             var carImages = await _service.GetAllAsync();
-            var carImageDtos = _mapper.Map<List<CarImageDto>>(carImages.ToList());    
+            var carImageDtos = _mapper.Map<List<CarImageDto>>(carImages.ToList());
             return CreateActionResult<List<CarImageDto>>(CustomResponseDto<List<CarImageDto>>.Success(200, carImageDtos));
         }
-
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -42,12 +43,10 @@ namespace RentaCar.API.Controllers
             return CreateActionResult(CustomResponseDto<CarImageDto>.Success(201, carImageDtos));
         }
 
-
-
         [HttpPut]
-        public async Task<IActionResult> Update(CarImageDto carImagesDto)
+        public async Task<IActionResult> Update(CarImageDto carImageDto)
         {
-            await _service.UpdateAsync(_mapper.Map<CarImage>(carImagesDto));
+            await _service.UpdateAsync(_mapper.Map<CarImage>(carImageDto));
 
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }

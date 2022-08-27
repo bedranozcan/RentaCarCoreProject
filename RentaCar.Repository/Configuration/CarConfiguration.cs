@@ -16,6 +16,7 @@ namespace RentaCar.Repository.Configuration
             builder.Property(x => x.DoorNumber).IsRequired().HasMaxLength(1);
             builder.Property(x => x.FuelType).IsRequired().HasMaxLength(25);
             builder.Property(x => x.LicanceClass).IsRequired().HasMaxLength(25);
+          
 
         }
     }

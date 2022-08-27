@@ -12,20 +12,25 @@ namespace RentaCar.API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IService<Car> _service;
-
-        public CarController(IService<Car> service, IMapper mapper)
+        private readonly ICarService _carService;
+        public CarController(IService<Car> service, IMapper mapper, ICarService carService)
         {
             _service = service;
             _mapper = mapper;
+            _carService = carService;
         }
 
+        [HttpGet("GetCarsWithCategory")]
+        public async Task<IActionResult> GetCarsWithCategory()
+        {
+            return CreateActionResult(await _carService.GetCarsWithCategory());
+        }
 
         [HttpGet]
         public async Task<IActionResult> All()
         {
             var cars = await _service.GetAllAsync();
             var carsDtos = _mapper.Map<List<CarDto>>(cars.ToList());
-            //return Ok( CustomResponseDto<List<CarsDto>>.Success(200, carsDto));
             return CreateActionResult<List<CarDto>>(CustomResponseDto<List<CarDto>>.Success(200, carsDtos));
         }
 
@@ -34,7 +39,6 @@ namespace RentaCar.API.Controllers
         {
             var cars = await _service.GetByIdAsync(id);
             var carsDtos = _mapper.Map<CarDto>(cars);
-            //return Ok( CustomResponseDto<List<CarsDto>>.Success(200, carsDto));
             return CreateActionResult(CustomResponseDto<CarDto>.Success(200, carsDtos));
         }
 
@@ -43,7 +47,6 @@ namespace RentaCar.API.Controllers
         {
             var car = await _service.AddAsync(_mapper.Map<Car>(carsDto));
             var carsDtos = _mapper.Map<CarDto>(car);
-            //return Ok( CustomResponseDto<List<CarsDto>>.Success(200, carsDto));
             return CreateActionResult(CustomResponseDto<CarDto>.Success(201, carsDtos));
         }
 

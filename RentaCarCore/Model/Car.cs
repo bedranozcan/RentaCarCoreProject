@@ -20,9 +20,8 @@ namespace RentaCar.Core.Model
         public int CategoriesId { get; set; }
         public int StatusId { get; set; }
         public ICollection<Hire> Hires { get; set; }
-        public  Category Categories { get; set; } = null!;
+        public  Category Category { get; set; } = null!;
         public  Status Status { get; set; } = null!;
-
-       
+        
     }
 }

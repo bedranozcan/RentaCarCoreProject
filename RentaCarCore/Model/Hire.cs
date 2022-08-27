@@ -17,7 +17,7 @@ namespace RentaCar.Core.Model
         public  Car Cars { get; set; } = null!;
         public  Customer Customers { get; set; } = null!;
         public  Status Status { get; set; } = null!;
-
+        public Payment Payment { get; set; }
 
     }
 }
