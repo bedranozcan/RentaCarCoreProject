@@ -1,4 +1,7 @@
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RentaCar.API.Filters;
 using RentaCar.Core.Repositories;
 using RentaCar.Core.Services;
 using RentaCar.Core.UnitOfWorks;
@@ -7,6 +10,7 @@ using RentaCar.Repository.Repositories;
 using RentaCar.Repository.UnitOfWorks;
 using RentaCar.Service.Mapping;
 using RentaCar.Service.Services;
+using RentaCar.Service.Validations;
 using System.Configuration;
 using System.Reflection;
 
@@ -14,7 +18,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.Filters.Add(new ValidateFilterAttribute())).AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CarDtoValidator>());
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RentaCar.API.Filters;
 using RentaCar.Core.Dtos;
 using RentaCar.Core.Model;
 using RentaCar.Core.Services;
 
 namespace RentaCar.API.Controllers
 {
-
     public class CarController : CustomBaseController
     {
         private readonly IMapper _mapper;
