@@ -2,6 +2,7 @@
 using RentaCar.Core.Repositories;
 using RentaCar.Core.Services;
 using RentaCar.Core.UnitOfWorks;
+using RentaCar.Service.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,13 @@ namespace RentaCar.Service.Services
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _repository.GetByIdAsync(id);
+
+            var hasCar= await _repository.GetByIdAsync(id);
+            if (hasCar == null)
+            {
+                throw new NotFoundException($"{typeof(T).Name} not found");   
+            }
+            return hasCar;
         }
 
         public async Task RemoveAsync(T entity)

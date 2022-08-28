@@ -18,6 +18,7 @@ namespace RentaCar.API.Middlewares
                     var statusCode = exceptionfeature.Error switch
                     {
                         ClientSideException => 400,
+                        NotFoundException=>404,
                       _  => 500
 
                     };
