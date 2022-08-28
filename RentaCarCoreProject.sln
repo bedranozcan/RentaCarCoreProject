@@ -3,17 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentaCar.Core", "RentaCarCore\RentaCar.Core.csproj", "{BAD7FA90-2550-4C89-8CFA-02B905E5D093}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentaCar.Core", "RentaCarCore\RentaCar.Core.csproj", "{BAD7FA90-2550-4C89-8CFA-02B905E5D093}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentaCar.Repository", "RentaCar.Repository\RentaCar.Repository.csproj", "{AB8C7384-6211-4BD7-8B90-6E50D9F4BD60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentaCar.Repository", "RentaCar.Repository\RentaCar.Repository.csproj", "{AB8C7384-6211-4BD7-8B90-6E50D9F4BD60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentaCar.Service", "RentaCar.Service\RentaCar.Service.csproj", "{A6FCBEFF-8AA8-4FD0-8A2F-B82E344AD917}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentaCar.Service", "RentaCar.Service\RentaCar.Service.csproj", "{A6FCBEFF-8AA8-4FD0-8A2F-B82E344AD917}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentaCar.API", "RentaCarAPI\RentaCar.API.csproj", "{16F0A459-64C7-4F41-B211-8DF4A7D67616}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentaCar.API", "RentaCarAPI\RentaCar.API.csproj", "{16F0A459-64C7-4F41-B211-8DF4A7D67616}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentaCar.Web", "RenaCar.Web\RentaCar.Web.csproj", "{E62AC793-4308-48C1-9981-840B7F2CA7EC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentaCar.Caching", "RenaCar.Caching\RentaCar.Caching.csproj", "{C3C0F75D-7B01-46B1-84BF-130A0FFB2F4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentaCar.Caching", "RenaCar.Caching\RentaCar.Caching.csproj", "{C3C0F75D-7B01-46B1-84BF-130A0FFB2F4F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5EDB813E-4AF7-4A38-ADC8-219E8E47A110}"
 	ProjectSection(SolutionItems) = preProject
@@ -42,10 +40,6 @@ Global
 		{16F0A459-64C7-4F41-B211-8DF4A7D67616}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16F0A459-64C7-4F41-B211-8DF4A7D67616}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16F0A459-64C7-4F41-B211-8DF4A7D67616}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E62AC793-4308-48C1-9981-840B7F2CA7EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E62AC793-4308-48C1-9981-840B7F2CA7EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E62AC793-4308-48C1-9981-840B7F2CA7EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E62AC793-4308-48C1-9981-840B7F2CA7EC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C3C0F75D-7B01-46B1-84BF-130A0FFB2F4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C3C0F75D-7B01-46B1-84BF-130A0FFB2F4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3C0F75D-7B01-46B1-84BF-130A0FFB2F4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
