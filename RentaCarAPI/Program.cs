@@ -2,6 +2,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentaCar.API.Filters;
+using RentaCar.API.Middlewares;
 using RentaCar.Core.Repositories;
 using RentaCar.Core.Services;
 using RentaCar.Core.UnitOfWorks;
@@ -38,8 +39,6 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 builder.Services.AddMemoryCache();
-
-
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -65,6 +64,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+app.UseCustomException();
 
 app.UseHttpsRedirection();
 
