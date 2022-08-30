@@ -4,10 +4,15 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentaCar.API.Filters;
-using RentaCar.API.Middlewares;
 using RentaCar.API.Modules;
+using RentaCar.Core.Repositories;
+using RentaCar.Core.Services;
+using RentaCar.Core.UnitOfWorks;
 using RentaCar.Repository;
+using RentaCar.Repository.Repositories;
+using RentaCar.Repository.UnitOfWorks;
 using RentaCar.Service.Mapping;
+using RentaCar.Service.Services;
 using RentaCar.Service.Validations;
 using System.Reflection;
 
@@ -25,16 +30,20 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped(typeof(NotFoundFilter<>));
+//builder.Services.AddScoped(typeof(NotFoundFilter<>));
 builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = "localhost:6379";
 });
 builder.Services.AddAutoMapper(typeof(MapProfile));
 builder.Services.AddMemoryCache();
-
-
-
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+builder.Services.AddScoped<ICarRepository, CarRepository>();
+builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
@@ -45,10 +54,10 @@ builder.Services.AddDbContext<AppDbContext>(x =>
 });
 
 
-builder.Host.UseServiceProviderFactory
-    (new AutofacServiceProviderFactory());
+//builder.Host.UseServiceProviderFactory
+//    (new AutofacServiceProviderFactory());
 
-builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepoServiceModule()));
+//builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepoServiceModule()));
 
 
 
@@ -62,7 +71,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.UseCustomException();
+//app.UseCustomException();
 
 app.UseHttpsRedirection();
 

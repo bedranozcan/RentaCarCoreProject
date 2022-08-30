@@ -11,10 +11,12 @@ namespace RentaCar.API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ICarService _service;
-        public CarController(IService<Car> service, IMapper mapper, ICarService carService)
+        private readonly IService<Car> _Iservice;
+        public CarController(IService<Car> service, IMapper mapper, ICarService carService, IService<Car> ıservice)
         {
             _mapper = mapper;
             _service = carService;
+            _Iservice = ıservice;
         }
 
         [HttpGet("GetCarsWithCategory")]
@@ -31,8 +33,8 @@ namespace RentaCar.API.Controllers
             return CreateActionResult<List<CarDto>>(CustomResponseDto<List<CarDto>>.Success(200, carsDtos));
         }
 
-        [ServiceFilter(typeof(NotFoundFilter<Car>))]
-        //aaaaaaaaaaaaaaaaaaaa
+        ////[ServiceFilter(typeof(NotFoundFilter<Car>))]
+        ////aaaaaaaaaaaaaaaaaaaa
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -53,16 +55,24 @@ namespace RentaCar.API.Controllers
         public async Task<IActionResult> Update(CarDto carsDto)
         {
             await _service.UpdateAsync(_mapper.Map<Car>(carsDto));
-           
+
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
             var cars = await _service.GetByIdAsync(id);
-             await _service.RemoveAsync(cars);
-          
+            await _service.RemoveAsync(cars);
+
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
+
+
+
+
+
+
+
+
     }
 }

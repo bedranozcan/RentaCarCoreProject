@@ -19,7 +19,7 @@ namespace RentaCar.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -34,15 +34,15 @@ namespace RentaCar.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Surname = table.Column<string>(type: "longtext", nullable: false)
+                    Surname = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    IdentityNumber = table.Column<int>(type: "int", nullable: false),
-                    PhoneNumber = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "longtext", nullable: false)
+                    IdentityNumber = table.Column<int>(type: "int", maxLength: 11, nullable: false),
+                    PhoneNumber = table.Column<int>(type: "int", maxLength: 11, nullable: false),
+                    Email = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Password = table.Column<string>(type: "longtext", nullable: false)
+                    Password = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     LicanceClass = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -89,19 +89,19 @@ namespace RentaCar.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PlakaNumber = table.Column<string>(type: "longtext", nullable: false)
+                    PlakaNumber = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Brand = table.Column<string>(type: "longtext", nullable: false)
+                    Brand = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Model = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Color = table.Column<string>(type: "longtext", nullable: false)
+                    Color = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    SeatsNumber = table.Column<int>(type: "int", nullable: false),
-                    DoorNumber = table.Column<int>(type: "int", nullable: false),
-                    FuelType = table.Column<string>(type: "longtext", nullable: false)
+                    SeatsNumber = table.Column<int>(type: "int", maxLength: 1, nullable: false),
+                    DoorNumber = table.Column<int>(type: "int", maxLength: 1, nullable: false),
+                    FuelType = table.Column<string>(type: "varchar(25)", maxLength: 25, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    LicanceClass = table.Column<string>(type: "longtext", nullable: false)
+                    LicanceClass = table.Column<string>(type: "varchar(25)", maxLength: 25, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: false)
@@ -154,8 +154,8 @@ namespace RentaCar.Repository.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CarsId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
-                    PurchaseDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    DeliveryDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    PurchaseDate = table.Column<DateTime>(type: "datetime(6)", maxLength: 100, nullable: false),
+                    DeliveryDate = table.Column<DateTime>(type: "datetime(6)", maxLength: 100, nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -220,13 +220,13 @@ namespace RentaCar.Repository.Migrations
                 name: "IX_Cars_CategoryId",
                 table: "Cars",
                 column: "CategoryId",
-                unique: true);
+                unique: false);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_StatusId",
                 table: "Cars",
                 column: "StatusId",
-                unique: true);
+                unique: false);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Hires_CarsId",

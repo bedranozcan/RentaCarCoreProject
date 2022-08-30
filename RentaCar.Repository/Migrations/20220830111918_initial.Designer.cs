@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentaCar.Repository;
@@ -11,7 +12,7 @@ using RentaCar.Repository;
 namespace RentaCar.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220827182253_initial")]
+    [Migration("20220830111918_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,29 +26,35 @@ namespace RentaCar.Repository.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Brand")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Color")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("DoorNumber")
+                        .HasMaxLength(1)
                         .HasColumnType("int");
 
                     b.Property<string>("FuelType")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(25)
+                        .HasColumnType("varchar(25)");
 
                     b.Property<string>("LicanceClass")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(25)
+                        .HasColumnType("varchar(25)");
 
                     b.Property<string>("Model")
                         .IsRequired()
@@ -55,9 +62,11 @@ namespace RentaCar.Repository.Migrations
 
                     b.Property<string>("PlakaNumber")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(11)
+                        .HasColumnType("varchar(11)");
 
                     b.Property<int>("SeatsNumber")
+                        .HasMaxLength(1)
                         .HasColumnType("int");
 
                     b.Property<int>("StatusId")
@@ -98,11 +107,13 @@ namespace RentaCar.Repository.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -113,13 +124,16 @@ namespace RentaCar.Repository.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("IdentityNumber")
+                        .HasMaxLength(11)
                         .HasColumnType("int");
 
                     b.Property<string>("LicanceClass")
@@ -128,18 +142,22 @@ namespace RentaCar.Repository.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("PhoneNumber")
+                        .HasMaxLength(11)
                         .HasColumnType("int");
 
                     b.Property<string>("Surname")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -150,7 +168,8 @@ namespace RentaCar.Repository.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CarsId")
                         .HasColumnType("int");
@@ -159,9 +178,11 @@ namespace RentaCar.Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DeliveryDate")
+                        .HasMaxLength(100)
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("PurchaseDate")
+                        .HasMaxLength(100)
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("StatusId")

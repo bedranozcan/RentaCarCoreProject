@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RentaCar.Core.Model;
+using System.Reflection;
 
 namespace RentaCar.Repository
 {
@@ -25,15 +26,18 @@ namespace RentaCar.Repository
         //        " 1234", new MySqlServerVersion(new Version(8, 0, 29)));
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Car>()
-            .HasOne(b => b.Category)
-            .WithOne(i => i.Car)
-            .HasForeignKey<Car>(b => b.CategoryId);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            //base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<Car>()
+            //.HasOne(b => b.Category)
+            //.WithOne(i => i.Car)
+            //.HasForeignKey<Car>(b => b.CategoryId);
+
         }
+       
     }
-    
-}
+
+    }
+
 
