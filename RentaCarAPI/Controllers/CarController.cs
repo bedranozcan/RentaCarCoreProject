@@ -33,8 +33,7 @@ namespace RentaCar.API.Controllers
             return CreateActionResult<List<CarDto>>(CustomResponseDto<List<CarDto>>.Success(200, carsDtos));
         }
 
-        ////[ServiceFilter(typeof(NotFoundFilter<Car>))]
-        ////aaaaaaaaaaaaaaaaaaaa
+//       [ServiceFilter(typeof(NotFoundFilter<Car>))] 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
