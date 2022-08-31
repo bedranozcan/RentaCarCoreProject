@@ -11,12 +11,12 @@ namespace RentaCar.API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ICarService _service;
-        private readonly IService<Car> _Iservice;
-        public CarController(IService<Car> service, IMapper mapper, ICarService carService, IService<Car> ıservice)
+    
+        public CarController( IMapper mapper, ICarService carService, IService<Car> ıservice)
         {
             _mapper = mapper;
             _service = carService;
-            _Iservice = ıservice;
+            
         }
 
         [HttpGet("GetCarsWithCategory")]

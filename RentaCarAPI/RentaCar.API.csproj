@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RentaCar.Service\RentaCar.Service.csproj" />
+    <ProjectReference Include="..\RenaCar.Caching\RentaCar.Caching.csproj" />
   </ItemGroup>
 
   <ItemGroup>

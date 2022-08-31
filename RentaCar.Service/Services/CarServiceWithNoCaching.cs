@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace RentaCar.Service.Services
 {
-    public class CarService : Service<Car>, ICarService
+    public class CarServiceWithNoCaching : Service<Car>, ICarService
     {
         private readonly ICarRepository _carRepository;
         private readonly IMapper _mapper;
-        public CarService(IGenericRepository<Car> repository,
+        public CarServiceWithNoCaching(IGenericRepository<Car> repository,
                             IUnitOfWork unitOfWork, IMapper mapper,
                             ICarRepository carRepository) : base(repository, unitOfWork)
         {
