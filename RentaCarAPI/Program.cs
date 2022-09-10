@@ -6,14 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using RentaCar.API.Filters;
 using RentaCar.API.Middlewares;
 using RentaCar.API.Modules;
-using RentaCar.Core.Repositories;
-using RentaCar.Core.Services;
-using RentaCar.Core.UnitOfWorks;
+using RentaCar.API.RabbitMQ;
 using RentaCar.Repository;
-using RentaCar.Repository.Repositories;
-using RentaCar.Repository.UnitOfWorks;
 using RentaCar.Service.Mapping;
-using RentaCar.Service.Services;
 using RentaCar.Service.Validations;
 using System.Reflection;
 
@@ -34,14 +29,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
 builder.Services.AddAutoMapper(typeof(MapProfile));
 builder.Services.AddMemoryCache();
-//builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-//builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-//builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
-//builder.Services.AddScoped<ICarRepository, CarRepository>();
-//builder.Services.AddScoped<ICarService, CarService>();
-//builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-//builder.Services.AddScoped<ICategoryService, CategoryService>();
-
+builder.Services.AddScoped<IRabbitMQ, MessageBrokerRabbit>();
 
 
 builder.Services.AddStackExchangeRedisCache(options =>

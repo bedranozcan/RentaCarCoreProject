@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RentaCar.API.RabbitMQ;
 using RentaCar.Core.Dtos;
 using RentaCar.Core.Model;
 using RentaCar.Core.Services;
@@ -13,11 +14,13 @@ namespace RentaCar.API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IService<Customer> _service;
+        private readonly IRabbitMQ _rabbitMQ;
 
-        public CustomerController(IService<Customer> service, IMapper mapper)
+        public CustomerController(IService<Customer> service, IMapper mapper, IRabbitMQ rabbitMQ)
         {
             _service = service;
             _mapper = mapper;
+            _rabbitMQ = rabbitMQ;
         }
 
         [HttpGet]
@@ -43,7 +46,9 @@ namespace RentaCar.API.Controllers
         {
             var customers = await _service.AddAsync(_mapper.Map<Customer>(customerDto));
             var customerDtos = _mapper.Map<CustomerDto>(customers);  
+            _rabbitMQ.SendUserMessage(customerDtos);
             return CreateActionResult(CustomResponseDto<CustomerDto>.Success(201, customerDtos));
+
         }
 
 
