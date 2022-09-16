@@ -10,6 +10,7 @@ namespace RentaCar.Core.Services
 {
     public interface ICarService:IService<Car>
     {
+
         Task<CustomResponseDto<List<CarsWithCategoryDto>>> GetCarsWithCategory();
     }
 }

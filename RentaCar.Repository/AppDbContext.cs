@@ -24,6 +24,7 @@ namespace RentaCar.Repository
         //{
         //    optionsBuilder.UseMySql("Server = localhost; Database = rentacardb; Uid = root; Pwd =" +
         //        " 1234", new MySqlServerVersion(new Version(8, 0, 29)));
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -36,8 +37,10 @@ namespace RentaCar.Repository
 
         }
        
-    }
+
 
     }
+
+}
 
 

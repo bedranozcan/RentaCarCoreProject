@@ -12,7 +12,7 @@ namespace RentaCar.API.Controllers
         private readonly IMapper _mapper;
         private readonly ICarService _service;
     
-        public CarController( IMapper mapper, ICarService carService, IService<Car> ıservice)
+        public CarController( IMapper mapper, ICarService carService)
         {
             _mapper = mapper;
             _service = carService;
@@ -26,7 +26,7 @@ namespace RentaCar.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult>GetAll()
         {
             var cars = await _service.GetAllAsync();
             var carsDtos = _mapper.Map<List<CarDto>>(cars.ToList());
