@@ -7,7 +7,7 @@ using RentaCar.Core.Model;
 using RentaCar.Core.Services;
 using RentaCar.Service.Mapping;
 
-namespace RentaCar.CarUnitTest
+namespace RentaCar.CarUnitTest.ControllerTest
 {
     public class CarsapiControllerTest
     {
@@ -18,9 +18,9 @@ namespace RentaCar.CarUnitTest
         public CarsapiControllerTest()
         {
             _mock = new Mock<ICarService>();
-            _mapper=new Mapper(new MapperConfiguration(x => x.AddProfile(new MapProfile())));
-            _carController = new CarController(_mapper,_mock.Object);
-           
+            _mapper = new Mapper(new MapperConfiguration(x => x.AddProfile(new MapProfile())));
+            _carController = new CarController(_mapper, _mock.Object);
+
         }
 
         [Fact]
@@ -28,7 +28,8 @@ namespace RentaCar.CarUnitTest
         {
             List<Car> cars = new List<Car>();
 
-            cars.Add(new Car {
+            cars.Add(new Car
+            {
                 Id = 1,
                 PlakaNumber = "17ab213123",
                 Brand = "asdasd",
@@ -46,7 +47,7 @@ namespace RentaCar.CarUnitTest
             var response = Assert.IsType<ObjectResult>(result);
             Assert.Equal(200, response.StatusCode);
             var responseValue = Assert.IsType<CustomResponseDto<CarDto>>(response.Value);
-            
+
         }
 
         [Fact]
@@ -108,7 +109,7 @@ namespace RentaCar.CarUnitTest
         public async void Save_ActionExecute_ReturnSuccess()
         {
             List<CarDto> cars = new List<CarDto>();
-           
+
             cars.Add(new CarDto
             {
                 Id = 1,
@@ -128,7 +129,7 @@ namespace RentaCar.CarUnitTest
             var response = Assert.IsType<ObjectResult>(result);
             Assert.Equal(201, response.StatusCode);
             var responseValue = Assert.IsType<CustomResponseDto<CarDto>>(response.Value);
-           
+
         }
 
         [Fact]

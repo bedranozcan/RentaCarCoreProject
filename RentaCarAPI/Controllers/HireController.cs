@@ -12,18 +12,19 @@ namespace RentaCar.API.Controllers
     public class HireController : CustomBaseController
     {
         private readonly IMapper _mapper;
-        private readonly IService<Hire> _service;
+        private readonly IHireService _hireService;
 
-        public HireController(IService<Hire> service, IMapper mapper)
+        public HireController(IMapper mapper, IHireService hireService)
         {
-            _service = service;
+           
             _mapper = mapper;
+            _hireService = hireService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult>GetAll()
         {
-            var hires = await _service.GetAllAsync();
+            var hires = await _hireService.GetAllAsync();
             var hiresDtos = _mapper.Map<List<HireDto>>(hires.ToList());
             return CreateActionResult<List<HireDto>>(CustomResponseDto<List<HireDto>>.Success(200, hiresDtos));
         }
@@ -32,7 +33,7 @@ namespace RentaCar.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var hires = await _service.GetByIdAsync(id);
+            var hires = await _hireService.GetByIdAsync(id);
             var hiresDtos = _mapper.Map<HireDto>(hires);
             return CreateActionResult(CustomResponseDto<HireDto>.Success(200, hiresDtos));
         }
@@ -41,7 +42,7 @@ namespace RentaCar.API.Controllers
         [HttpPost()]
         public async Task<IActionResult> Save(HireDto hireDto)
         {
-            var hires = await _service.AddAsync(_mapper.Map<Hire>(hireDto));
+            var hires = await _hireService.AddAsync(_mapper.Map<Hire>(hireDto));
             var hiresDtos = _mapper.Map<HireDto>(hires);
             return CreateActionResult(CustomResponseDto<HireDto>.Success(201, hiresDtos));
         }
@@ -50,7 +51,7 @@ namespace RentaCar.API.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(HireDto hireDto)
         {
-            await _service.UpdateAsync(_mapper.Map<Hire>(hireDto));
+            await _hireService.UpdateAsync(_mapper.Map<Hire>(hireDto));
 
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
@@ -58,8 +59,8 @@ namespace RentaCar.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
-            var hires = await _service.GetByIdAsync(id);
-            await _service.RemoveAsync(hires);
+            var hires = await _hireService.GetByIdAsync(id);
+            await _hireService.RemoveAsync(hires);
 
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }

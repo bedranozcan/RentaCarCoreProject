@@ -13,20 +13,21 @@ namespace RentaCar.API.Controllers
     public class CustomerController : CustomBaseController
     {
         private readonly IMapper _mapper;
-        private readonly IService<Customer> _service;
+        private readonly ICustomerService _customerService;
         private readonly IRabbitMQ _rabbitMQ;
 
-        public CustomerController(IService<Customer> service, IMapper mapper, IRabbitMQ rabbitMQ)
+        public CustomerController(IMapper mapper, IRabbitMQ rabbitMQ, ICustomerService customerService)
         {
-            _service = service;
+           
             _mapper = mapper;
             _rabbitMQ = rabbitMQ;
+            _customerService = customerService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult>GetAll()
         {
-            var customers = await _service.GetAllAsync();
+            var customers = await _customerService.GetAllAsync();
             var customersDtos = _mapper.Map<List<CustomerDto>>(customers.ToList());
             return CreateActionResult<List<CustomerDto>>(CustomResponseDto<List<CustomerDto>>.Success(200, customersDtos));
         }
@@ -35,7 +36,7 @@ namespace RentaCar.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var customers = await _service.GetByIdAsync(id);
+            var customers = await _customerService.GetByIdAsync(id);
             var customerDtos = _mapper.Map<CustomerDto>(customers);
             return CreateActionResult(CustomResponseDto<CustomerDto>.Success(200, customerDtos));
         }
@@ -44,7 +45,7 @@ namespace RentaCar.API.Controllers
         [HttpPost()]
         public async Task<IActionResult> Save(CustomerDto customerDto)
         {
-            var customers = await _service.AddAsync(_mapper.Map<Customer>(customerDto));
+            var customers = await _customerService.AddAsync(_mapper.Map<Customer>(customerDto));
             var customerDtos = _mapper.Map<CustomerDto>(customers);  
             _rabbitMQ.SendUserMessage(customerDtos);
             return CreateActionResult(CustomResponseDto<CustomerDto>.Success(201, customerDtos));
@@ -55,7 +56,7 @@ namespace RentaCar.API.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(CustomerDto customerDto)
         {
-            await _service.UpdateAsync(_mapper.Map<Customer>(customerDto));
+            await _customerService.UpdateAsync(_mapper.Map<Customer>(customerDto));
 
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
@@ -63,8 +64,8 @@ namespace RentaCar.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
-            var customers = await _service.GetByIdAsync(id);
-            await _service.RemoveAsync(customers);
+            var customers = await _customerService.GetByIdAsync(id);
+            await _customerService.RemoveAsync(customers);
 
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }

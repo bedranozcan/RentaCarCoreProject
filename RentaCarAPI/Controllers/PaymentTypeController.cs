@@ -12,18 +12,20 @@ namespace RentaCar.API.Controllers
     public class PaymentTypeController : CustomBaseController
     {
         private readonly IMapper _mapper;
-        private readonly IService<PaymentType> _service;
+        private readonly IPaymentTypeService _paymentTypeService;
 
-        public PaymentTypeController(IService<PaymentType> service, IMapper mapper)
+
+        public PaymentTypeController(IMapper mapper,IPaymentTypeService paymentTypeService)
         {
-            _service = service;
+
             _mapper = mapper;
+            _paymentTypeService = paymentTypeService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult>GetAll()
         {
-            var paymentTypes = await _service.GetAllAsync();
+            var paymentTypes = await _paymentTypeService.GetAllAsync();
             var paymentTypeDtos = _mapper.Map<List<PaymentTypeDto>>(paymentTypes.ToList());
             return CreateActionResult<List<PaymentTypeDto>>(CustomResponseDto<List<PaymentTypeDto>>.Success(200, paymentTypeDtos));
         }
@@ -32,7 +34,7 @@ namespace RentaCar.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var paymentTypes = await _service.GetByIdAsync(id);
+            var paymentTypes = await _paymentTypeService.GetByIdAsync(id);
             var paymentTypeDtos = _mapper.Map<PaymentTypeDto>(paymentTypes);
             return CreateActionResult(CustomResponseDto<PaymentTypeDto>.Success(200, paymentTypeDtos));
         }
@@ -41,7 +43,7 @@ namespace RentaCar.API.Controllers
         [HttpPost()]
         public async Task<IActionResult> Save(PaymentTypeDto paymentTypeDto)
         {
-            var paymentTypes = await _service.AddAsync(_mapper.Map<PaymentType>(paymentTypeDto));
+            var paymentTypes = await _paymentTypeService.AddAsync(_mapper.Map<PaymentType>(paymentTypeDto));
             var paymentTypeDtos = _mapper.Map<PaymentTypeDto>(paymentTypes);
             return CreateActionResult(CustomResponseDto<PaymentTypeDto>.Success(201, paymentTypeDtos));
         }
@@ -50,7 +52,7 @@ namespace RentaCar.API.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(PaymentTypeDto paymentTypeDto)
         {
-            await _service.UpdateAsync(_mapper.Map<PaymentType>(paymentTypeDto));
+            await _paymentTypeService.UpdateAsync(_mapper.Map<PaymentType>(paymentTypeDto));
 
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
@@ -58,8 +60,8 @@ namespace RentaCar.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
-            var paymentTypes = await _service.GetByIdAsync(id);
-            await _service.RemoveAsync(paymentTypes);
+            var paymentTypes = await _paymentTypeService.GetByIdAsync(id);
+            await _paymentTypeService.RemoveAsync(paymentTypes);
 
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }

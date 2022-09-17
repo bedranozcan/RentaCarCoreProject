@@ -12,19 +12,19 @@ namespace RentaCar.API.Controllers
     public class StatusController : CustomBaseController
     {
         private readonly IMapper _mapper;
-        private readonly IService<Status> _service;
+        private readonly IStatusService _statusService;
 
-        public StatusController(IService<Status> service, IMapper mapper)
+        public StatusController(IMapper mapper, IStatusService statusService)
         {
-            _service = service;
-            _mapper = mapper;
 
+            _mapper = mapper;
+            _statusService = statusService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult>GetAll()
         {
-            var statuses = await _service.GetAllAsync();
+            var statuses = await _statusService.GetAllAsync();
             var statusDtos = _mapper.Map<List<StatusDto>>(statuses.ToList());
             return CreateActionResult<List<StatusDto>>(CustomResponseDto<List<StatusDto>>.Success(200, statusDtos));
         }
@@ -33,7 +33,7 @@ namespace RentaCar.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var statuses = await _service.GetByIdAsync(id);
+            var statuses = await _statusService.GetByIdAsync(id);
             var statusDtos = _mapper.Map<StatusDto>(statuses);
             return CreateActionResult(CustomResponseDto<StatusDto>.Success(200, statusDtos));
         }
@@ -42,7 +42,7 @@ namespace RentaCar.API.Controllers
         [HttpPost()]
         public async Task<IActionResult> Save(StatusDto statusDto)
         {
-            var statuses = await _service.AddAsync(_mapper.Map<Status>(statusDto));
+            var statuses = await _statusService.AddAsync(_mapper.Map<Status>(statusDto));
             var statusDtos = _mapper.Map<StatusDto>(statuses);
             return CreateActionResult(CustomResponseDto<StatusDto>.Success(201, statusDtos));
         }
@@ -51,7 +51,7 @@ namespace RentaCar.API.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(StatusDto statusDto)
         {
-            await _service.UpdateAsync(_mapper.Map<Status>(statusDto));
+            await _statusService.UpdateAsync(_mapper.Map<Status>(statusDto));
 
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
@@ -59,8 +59,8 @@ namespace RentaCar.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
-            var statuses = await _service.GetByIdAsync(id);
-            await _service.RemoveAsync(statuses);
+            var statuses = await _statusService.GetByIdAsync(id);
+            await _statusService.RemoveAsync(statuses);
 
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
