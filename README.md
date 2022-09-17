@@ -6,7 +6,7 @@
  :pushpin: FluentValidation<br>
  :pushpin: Autofac<br>
  :pushpin: RabitMQ<br>
- :pushpin: Inmemory Cache<br>
+ :pushpin: InMemory Cache<br>
  :pushpin: MySql<br>
- :pushpin: Swagger
-
+ :pushpin: Swagger<br>
+ :pushpin: UnitTest
