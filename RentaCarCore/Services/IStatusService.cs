@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace RentaCar.Core.Services
 {
-    public interface IStatusService : IService<Status>
+    public interface IStatusService :IService<Status>
     {
+
     }
 }

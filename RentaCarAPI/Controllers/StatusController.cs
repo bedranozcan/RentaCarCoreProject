@@ -14,11 +14,13 @@ namespace RentaCar.API.Controllers
         private readonly IMapper _mapper;
         private readonly IStatusService _statusService;
 
-        public StatusController(IMapper mapper, IStatusService statusService)
+        public StatusController(IMapper mapper,IStatusService statusService)
         {
 
             _mapper = mapper;
             _statusService = statusService;
+            
+            //_service = service;
         }
 
         [HttpGet]
@@ -26,7 +28,7 @@ namespace RentaCar.API.Controllers
         {
             var statuses = await _statusService.GetAllAsync();
             var statusDtos = _mapper.Map<List<StatusDto>>(statuses.ToList());
-            return CreateActionResult<List<StatusDto>>(CustomResponseDto<List<StatusDto>>.Success(200, statusDtos));
+            return CreateActionResult(CustomResponseDto<List<StatusDto>>.Success(200, statusDtos));
         }
 
 
