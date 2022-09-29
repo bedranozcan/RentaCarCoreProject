@@ -15,7 +15,7 @@ namespace RentaCar.Core.Dtos
         public int StatusCode { get; set; }
 
 
-        public List<string> Errors { get; set; }
+        public List<String> Errors { get; set; }
 
 
         public static CustomResponseDto<T> Success(int statusCode, T data)
@@ -26,7 +26,7 @@ namespace RentaCar.Core.Dtos
         {
             return new CustomResponseDto<T> { StatusCode = statusCode };
         }
-        public static CustomResponseDto<T> Fail(int statusCode, List<String> errors)
+        public static CustomResponseDto<T> Fail(int statusCode, List<string> errors)
         {
             return new CustomResponseDto<T> { StatusCode = statusCode, Errors = errors };
         }

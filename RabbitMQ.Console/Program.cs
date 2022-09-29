@@ -21,7 +21,7 @@ consumer.Received += (object sender, BasicDeliverEventArgs e) => {
     var message = Encoding.UTF8.GetString(body);
     var customerDtos = JsonSerializer.Deserialize<CustomerDto>(message);
     Thread.Sleep(5000);
-    Console.WriteLine("Kayıt Başarılı " + customerDtos.Email);
+    Console.WriteLine("Kayıt Başarılı" + customerDtos.Email);
     channel.BasicAck(e.DeliveryTag, false);
 };
 //read the message 
