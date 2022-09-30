@@ -11,5 +11,7 @@ namespace RentaCar.Core.Services
     public interface ICategoryService:IService<Category>
     {
       public Task<CustomResponseDto<CategoryWithCarsDto>> GetSingleCategoryByIdWithCarsAsync(int categoryId);
+
+        Task<CustomResponseDto<List<CategoryWithCarsDto>>> GetCategoriesWithCars();
     }
 }

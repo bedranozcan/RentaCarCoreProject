@@ -9,6 +9,8 @@ namespace RentaCar.Core.Repositories
 {
     public interface ICategoryRepository:IGenericRepository<Category>
     {
-        Task<Category> GetSingleCategoryByIdWithCarsAsync(int categoryId);
+        Task<Category>GetSingleCategoryByIdWithCarsAsync(int id);
+        Task<List<Category>> GetCategoriesWithCars();
+
     }
 }

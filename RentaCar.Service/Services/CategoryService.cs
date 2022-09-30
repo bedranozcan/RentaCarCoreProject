@@ -4,6 +4,7 @@ using RentaCar.Core.Model;
 using RentaCar.Core.Repositories;
 using RentaCar.Core.Services;
 using RentaCar.Core.UnitOfWorks;
+using RentaCar.Repository.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,14 @@ namespace RentaCar.Service.Services
             var category = await _categoryRepository.GetSingleCategoryByIdWithCarsAsync(categoryId);
             var categoriesDto = _mapper.Map<CategoryWithCarsDto>(category);
             return CustomResponseDto<CategoryWithCarsDto>.Success(200, categoriesDto);
+        }
+    
+
+        public async Task<CustomResponseDto<List<CategoryWithCarsDto>>> GetCategoriesWithCars()
+        {
+            var categories = await _categoryRepository.GetCategoriesWithCars();
+            var categoriesDtos = _mapper.Map<List<CategoryWithCarsDto>>(categories);
+            return CustomResponseDto<List<CategoryWithCarsDto>>.Success(200, categoriesDtos);
         }
     }
 }

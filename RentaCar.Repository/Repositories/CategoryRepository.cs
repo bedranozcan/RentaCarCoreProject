@@ -15,9 +15,16 @@ namespace RentaCar.Repository.Repositories
         {
         }
 
+        public async Task<List<Category>> GetCategoriesWithCars()
+        {
+            return await _context.Categories.Include(x => x.Car).ToListAsync();
+        }
+
         public async Task<Category> GetSingleCategoryByIdWithCarsAsync(int categoryId)
         {
             return await _context.Categories.Include(x => x.Car).Where(x => x.Id == categoryId).SingleOrDefaultAsync();
         }
+
+
     }
 }

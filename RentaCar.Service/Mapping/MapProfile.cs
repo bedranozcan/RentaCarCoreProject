@@ -23,7 +23,8 @@ namespace RentaCar.Service.Mapping
             CreateMap<CarImage, CarImageDto>().ReverseMap();
             CreateMap<Car, CarsWithCategoryDto>();
             CreateMap<Category, CategoryWithCarsDto>();
-           
+            
+
         }
     }
 }

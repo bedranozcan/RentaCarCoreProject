@@ -25,6 +25,13 @@ namespace RentaCar.API.Controllers
             return CreateActionResult(await _categoryService.GetSingleCategoryByIdWithCarsAsync(categoryId));
         }
 
+
+        [HttpGet(" GetCategoryWithCars")]
+        public async Task<IActionResult> GetCategoryWithCars()
+        {
+            return CreateActionResult(await _categoryService.GetCategoriesWithCars());
+        }
+
         [HttpGet]
         public async Task<IActionResult>GetAll()
         {
