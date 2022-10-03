@@ -24,14 +24,6 @@ namespace RentaCar.Service.Services
             _categoryRepository = categoryRepository;
         }
 
-        public async Task<CustomResponseDto<CategoryWithCarsDto>> GetSingleCategoryByIdWithCarsAsync(int categoryId)
-        {
-            var category = await _categoryRepository.GetSingleCategoryByIdWithCarsAsync(categoryId);
-            var categoriesDto = _mapper.Map<CategoryWithCarsDto>(category);
-            return CustomResponseDto<CategoryWithCarsDto>.Success(200, categoriesDto);
-        }
-    
-
         public async Task<CustomResponseDto<List<CategoryWithCarsDto>>> GetCategoriesWithCars()
         {
             var categories = await _categoryRepository.GetCategoriesWithCars();

@@ -8,6 +8,6 @@ namespace RentaCar.Core.Dtos
 {
     public class CategoryWithCarsDto:CategoryDto
     {
-        public CarDto Car { get; set; }
+        public CarDto Car { get; set; }  
     }
 }
