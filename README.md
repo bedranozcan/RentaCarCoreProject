@@ -5,7 +5,7 @@
  :pushpin: Entity Framework Core<br>
  :pushpin: FluentValidation<br>
  :pushpin: Autofac<br>
- :pushpin: RabitMQ<br>
+ :pushpin: RabbitMQ<br>
  :pushpin: InMemory Cache<br>
  :pushpin: MySql<br>
  :pushpin: Swagger<br>
